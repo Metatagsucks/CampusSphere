@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Briefcase, LayoutDashboard, ShieldCheck, User } from 'lucide-react';
+import { LayoutDashboard, ShieldCheck } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -29,7 +29,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   const navItems = [
-    { href: '/', label: 'Dashboard', icon: LayoutDashboard },
+    { href: '/opportunities', label: 'Dashboard', icon: LayoutDashboard },
     { href: '/scam-detector', label: 'Scam Detector', icon: ShieldCheck },
   ];
 
@@ -37,7 +37,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
     <>
       <Sidebar>
         <SidebarHeader className="border-b">
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/opportunities" className="flex items-center gap-2">
             <svg
               className="h-8 w-8 text-primary"
               viewBox="0 0 24 24"
