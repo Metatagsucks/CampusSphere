@@ -7,7 +7,9 @@ import { Separator } from '@/components/ui/separator';
 import { ReviewCard } from '@/components/review-card';
 import { ReviewForm } from '@/components/review-form';
 import { summarizeReviews } from '@/ai/flows/summarize-reviews';
-import { Briefcase, BookOpen, MapPin, CheckCircle, Bot } from 'lucide-react';
+import { Briefcase, BookOpen, MapPin, CheckCircle, Bot, MessageCircle } from 'lucide-react';
+import { ChatDialog } from '@/components/chat-dialog';
+import { Button } from '@/components/ui/button';
 
 export default async function OpportunityDetailPage({ params }: { params: { id: string } }) {
   const opportunity = getOpportunityById(params.id);
@@ -92,6 +94,17 @@ export default async function OpportunityDetailPage({ params }: { params: { id: 
               <CardTitle>Details</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-base">
+              <ChatDialog
+                opportunityTitle={opportunity.title}
+                opportunityCompany={opportunity.company}
+                opportunityDescription={opportunity.description}
+              >
+                <Button className="w-full">
+                  <MessageCircle className="mr-2 h-4 w-4" />
+                  Chat with an Alumnus
+                </Button>
+              </ChatDialog>
+              <Separator />
               <div className="flex items-center">
                 {typeIcons[opportunity.type]}
                 <div>
