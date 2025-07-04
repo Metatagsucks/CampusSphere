@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Briefcase, GraduationCap, LayoutDashboard, ShieldCheck, User } from 'lucide-react';
+import { Briefcase, LayoutDashboard, ShieldCheck, User } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -38,7 +38,18 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
       <Sidebar>
         <SidebarHeader className="border-b">
           <Link href="/" className="flex items-center gap-2">
-            <GraduationCap className="h-8 w-8 text-primary" />
+            <svg
+              className="h-8 w-8 text-primary"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="1.5" />
+                <path d="M15.5 15.5C15.5 15.5 14.5 14.5 12 14.5C9.5 14.5 8.5 15.5 8.5 15.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                <path d="M8.5 8.5C8.5 8.5 9.5 9.5 12 9.5C14.5 9.5 15.5 8.5 15.5 8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                <path d="M8.5 8.5V15.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                <path d="M15.5 8.5V15.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
             <h1 className="text-xl font-bold">CampusSphere</h1>
           </Link>
         </SidebarHeader>
