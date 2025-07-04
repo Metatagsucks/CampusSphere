@@ -10,6 +10,7 @@ import { summarizeReviews } from '@/ai/flows/summarize-reviews';
 import { Briefcase, BookOpen, MapPin, CheckCircle, Bot, MessageCircle } from 'lucide-react';
 import { ChatDialog } from '@/components/chat-dialog';
 import { Button } from '@/components/ui/button';
+import type { OpportunityType } from '@/lib/types';
 
 export default async function OpportunityDetailPage({ params }: { params: { id: string } }) {
   const opportunity = getOpportunityById(params.id);
@@ -22,7 +23,7 @@ export default async function OpportunityDetailPage({ params }: { params: { id: 
     opportunity.reviews.length > 0
       ? await summarizeReviews({
           reviews: opportunity.reviews.map(r => ({ text: r.text, rating: r.rating })),
-          itemType: opportunity.type.toLowerCase() as 'internship' | 'course',
+          itemType: opportunity.type.toLowerCase() as Lowercase<OpportunityType>,
           itemName: opportunity.title,
         })
       : null;

@@ -8,26 +8,14 @@
  */
 
 import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+import {
+  AlumniChatInputSchema,
+  AlumniChatOutputSchema,
+  type AlumniChatInput,
+  type AlumniChatOutput,
+} from '@/ai/types';
 
-const ChatMessageSchema = z.object({
-  role: z.enum(['user', 'model']),
-  content: z.string(),
-});
-
-export const AlumniChatInputSchema = z.object({
-  opportunityTitle: z.string().describe('The title of the opportunity.'),
-  opportunityCompany: z.string().describe('The company offering the opportunity.'),
-  opportunityDescription: z.string().describe('The description of the opportunity.'),
-  chatHistory: z.array(ChatMessageSchema).describe('The history of the conversation so far.'),
-});
-export type AlumniChatInput = z.infer<typeof AlumniChatInputSchema>;
-
-export const AlumniChatOutputSchema = z.object({
-  response: z.string().describe('The AI-generated response from the "alumnus".'),
-});
-export type AlumniChatOutput = z.infer<typeof AlumniChatOutputSchema>;
-
+export type { AlumniChatInput, AlumniChatOutput };
 
 export async function alumniChat(input: AlumniChatInput): Promise<AlumniChatOutput> {
   return alumniChatFlow(input);

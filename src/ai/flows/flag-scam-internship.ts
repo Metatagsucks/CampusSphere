@@ -8,34 +8,14 @@
  */
 
 import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+import {
+  FlagScamInternshipInputSchema,
+  FlagScamInternshipOutputSchema,
+  type FlagScamInternshipInput,
+  type FlagScamInternshipOutput,
+} from '@/ai/types';
 
-const FlagScamInternshipInputSchema = z.object({
-  internshipDescription: z
-    .string()
-    .describe('The full description of the internship posting.'),
-});
-export type FlagScamInternshipInput = z.infer<typeof FlagScamInternshipInputSchema>;
-
-const FlagScamInternshipOutputSchema = z.object({
-  isScam: z
-    .boolean()
-    .describe(
-      'A boolean value indicating whether the internship is likely a scam (true) or not (false).'      
-    ),
-  confidenceScore: z
-    .number()
-    .describe(
-      'A numerical score (0-1) indicating the confidence level of the scam detection. Higher values indicate higher confidence in the scam detection.'
-    ),
-  reason: z
-    .string()
-    .describe(
-      'A detailed explanation of why the internship is flagged as a potential scam, including specific red flags or suspicious patterns found in the description.'
-    ),
-});
-
-export type FlagScamInternshipOutput = z.infer<typeof FlagScamInternshipOutputSchema>;
+export type { FlagScamInternshipInput, FlagScamInternshipOutput };
 
 export async function flagScamInternship(input: FlagScamInternshipInput): Promise<FlagScamInternshipOutput> {
   return flagScamInternshipFlow(input);

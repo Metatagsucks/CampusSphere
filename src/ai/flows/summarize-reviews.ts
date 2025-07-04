@@ -9,24 +9,14 @@
  */
 
 import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+import {
+  SummarizeReviewsInputSchema,
+  SummarizeReviewsOutputSchema,
+  type SummarizeReviewsInput,
+  type SummarizeReviewsOutput,
+} from '@/ai/types';
 
-const SummarizeReviewsInputSchema = z.object({
-  reviews: z.array(
-    z.object({
-      text: z.string().describe('The text of the review.'),
-      rating: z.number().describe('The rating given in the review.'),
-    })
-  ).describe('An array of student reviews with text and rating.'),
-  itemType: z.enum(['internship', 'course']).describe('The type of item being reviewed.'),
-  itemName: z.string().describe('The name of the item being reviewed.'),
-});
-export type SummarizeReviewsInput = z.infer<typeof SummarizeReviewsInputSchema>;
-
-const SummarizeReviewsOutputSchema = z.object({
-  summary: z.string().describe('A concise summary of the reviews and ratings.'),
-});
-export type SummarizeReviewsOutput = z.infer<typeof SummarizeReviewsOutputSchema>;
+export type { SummarizeReviewsInput, SummarizeReviewsOutput };
 
 export async function summarizeReviews(input: SummarizeReviewsInput): Promise<SummarizeReviewsOutput> {
   return summarizeReviewsFlow(input);
