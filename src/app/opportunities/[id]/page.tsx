@@ -44,8 +44,8 @@ export default async function OpportunityDetailPage({ params }: { params: { id: 
                     <Image
                         src={opportunity.image}
                         alt={opportunity.title}
-                        layout="fill"
-                        objectFit="cover"
+                        fill
+                        className="object-cover"
                         data-ai-hint={opportunity.dataAiHint}
                     />
                 </div>

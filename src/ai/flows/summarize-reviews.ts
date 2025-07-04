@@ -47,6 +47,11 @@ const summarizeReviewsFlow = ai.defineFlow(
   },
   async input => {
     const {output} = await prompt(input);
-    return output!;
+    if (!output) {
+      return {
+        summary: 'Could not generate a summary at this time. Please try again later.',
+      };
+    }
+    return output;
   }
 );

@@ -22,8 +22,8 @@ export function OpportunityCard({ opportunity }: { opportunity: Opportunity }) {
               <Image
                 src={opportunity.image}
                 alt={opportunity.title}
-                layout="fill"
-                objectFit="cover"
+                fill
+                className="object-cover"
                 data-ai-hint={opportunity.dataAiHint}
               />
               {opportunity.verified && (
