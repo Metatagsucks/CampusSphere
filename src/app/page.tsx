@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Input } from '@/components/ui/input';
 import {
   Select,
@@ -14,13 +14,13 @@ import type { Opportunity, OpportunityCategory, OpportunityType } from '@/lib/ty
 import { Search } from 'lucide-react';
 
 export default function DashboardPage() {
-  const allOpportunities = getOpportunities();
+  const allOpportunities = useMemo(() => getOpportunities(), []);
   const [opportunities, setOpportunities] = useState<Opportunity[]>(allOpportunities);
   const [searchTerm, setSearchTerm] = useState('');
   const [typeFilter, setTypeFilter] = useState<OpportunityType | 'all'>('all');
   const [categoryFilter, setCategoryFilter] = useState<OpportunityCategory | 'all'>('all');
 
-  const handleFilterChange = () => {
+  useEffect(() => {
     let filtered = allOpportunities;
 
     if (searchTerm) {
@@ -39,23 +39,7 @@ export default function DashboardPage() {
     }
 
     setOpportunities(filtered);
-  };
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-    handleFilterChange();
-  };
-  
-  const handleTypeChange = (value: OpportunityType | 'all') => {
-    setTypeFilter(value);
-    // We need to use a timeout to allow the state to update before filtering
-    setTimeout(handleFilterChange, 0);
-  }
-  
-  const handleCategoryChange = (value: OpportunityCategory | 'all') => {
-    setCategoryFilter(value);
-    setTimeout(handleFilterChange, 0);
-  }
+  }, [searchTerm, typeFilter, categoryFilter, allOpportunities]);
 
 
   return (
@@ -76,10 +60,10 @@ export default function DashboardPage() {
             placeholder="Search by title or company..."
             className="pl-10"
             value={searchTerm}
-            onChange={handleSearchChange}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <Select value={typeFilter} onValueChange={handleTypeChange}>
+        <Select value={typeFilter} onValueChange={(value) => setTypeFilter(value as OpportunityType | 'all')}>
           <SelectTrigger className="w-full sm:w-[180px]">
             <SelectValue placeholder="Filter by type" />
           </SelectTrigger>
@@ -90,7 +74,7 @@ export default function DashboardPage() {
             <SelectItem value="Placement">Placement</SelectItem>
           </SelectContent>
         </Select>
-        <Select value={categoryFilter} onValueChange={handleCategoryChange}>
+        <Select value={categoryFilter} onValueChange={(value) => setCategoryFilter(value as OpportunityCategory | 'all')}>
           <SelectTrigger className="w-full sm:w-[180px]">
             <SelectValue placeholder="Filter by category" />
           </SelectTrigger>
