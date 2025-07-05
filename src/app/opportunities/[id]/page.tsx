@@ -12,8 +12,8 @@ import { ChatDialog } from '@/components/chat-dialog';
 import { Button } from '@/components/ui/button';
 import type { OpportunityType } from '@/lib/types';
 
-export default async function OpportunityDetailPage({ params }: { params: { id: string } }) {
-  const opportunity = getOpportunityById(params.id);
+export default async function OpportunityDetailPage({ params: { id } }: { params: { id: string } }) {
+  const opportunity = getOpportunityById(id);
 
   if (!opportunity) {
     notFound();
