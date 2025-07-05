@@ -12,13 +12,11 @@ import { ChatDialog } from '@/components/chat-dialog';
 import { Button } from '@/components/ui/button';
 import type { OpportunityType } from '@/lib/types';
 
-type PageProps = {
-  params: {
-    id: string;
-  };
-};
-
-export default async function OpportunityDetailPage({ params }: PageProps) {
+export default async function OpportunityDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const opportunity = getOpportunityById(params.id);
 
   if (!opportunity) {
