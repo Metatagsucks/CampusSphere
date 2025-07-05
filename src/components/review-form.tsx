@@ -24,13 +24,23 @@ export function ReviewForm() {
     return (
         <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-                <Label className="mb-2 block">Rating</Label>
-                <div className="flex items-center gap-1">
+                <Label id="rating-label" className="mb-2 block">Rating</Label>
+                <div role="radiogroup" aria-labelledby="rating-label" className="flex items-center gap-1">
                     {[...Array(5)].map((_, i) => (
                          <Star
                             key={i}
+                            role="radio"
+                            aria-checked={rating === i + 1}
+                            aria-label={`${i + 1} star`}
+                            tabIndex={0}
                             className={`w-7 h-7 cursor-pointer transition-colors ${i < rating ? 'text-accent fill-accent' : 'text-muted-foreground/30 hover:text-accent/70'}`}
                             onClick={() => setRating(i + 1)}
+                            onKeyDown={(e) => {
+                                if (e.key === ' ' || e.key === 'Enter') {
+                                    e.preventDefault();
+                                    setRating(i + 1);
+                                }
+                            }}
                         />
                     ))}
                 </div>
