@@ -37,7 +37,7 @@ export default async function OpportunityDetailPage({ params }: PageProps) {
   const iconProps = { className: "w-5 h-5 mr-2 text-primary" };
   const typeIcons = {
     Internship: <Briefcase {...iconProps} />,
-    Course: <BookOpen {...icon_props} />,
+    Course: <BookOpen {...iconProps} />,
     Placement: <Briefcase {...iconProps} />,
   };
   
