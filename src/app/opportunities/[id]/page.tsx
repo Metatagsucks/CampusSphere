@@ -12,8 +12,14 @@ import { ChatDialog } from '@/components/chat-dialog';
 import { Button } from '@/components/ui/button';
 import type { OpportunityType } from '@/lib/types';
 
-export default async function OpportunityDetailPage({ params: { id } }: { params: { id: string } }) {
-  const opportunity = getOpportunityById(id);
+type PageProps = {
+  params: {
+    id: string;
+  };
+};
+
+export default async function OpportunityDetailPage({ params }: PageProps) {
+  const opportunity = getOpportunityById(params.id);
 
   if (!opportunity) {
     notFound();
@@ -31,7 +37,7 @@ export default async function OpportunityDetailPage({ params: { id } }: { params
   const iconProps = { className: "w-5 h-5 mr-2 text-primary" };
   const typeIcons = {
     Internship: <Briefcase {...iconProps} />,
-    Course: <BookOpen {...iconProps} />,
+    Course: <BookOpen {...icon_props} />,
     Placement: <Briefcase {...iconProps} />,
   };
   
